@@ -1,0 +1,27 @@
+{
+  "name": "pressure-pal-control-room",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Electron desktop app and Arduino Uno firmware for live pressure monitoring and solenoid control.",
+  "main": "dist/main/main/main.js",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:renderer": "tsc -p tsconfig.renderer.json",
+    "build:tests": "tsc -p tsconfig.tests.json",
+    "copy:assets": "node scripts/copy-assets.mjs",
+    "build": "cmd /c npm run clean && cmd /c npm run build:main && cmd /c npm run build:renderer && cmd /c npm run copy:assets",
+    "firmware:build": "node scripts/build-firmware.mjs",
+    "start": "cmd /c npm run build && electron .",
+    "test": "cmd /c npm run build:tests && node scripts/run-tests.mjs"
+  },
+  "dependencies": {
+    "electron": "^35.0.0",
+    "serialport": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.1.0"
+  }
+}
