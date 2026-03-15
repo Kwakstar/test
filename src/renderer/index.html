@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pressure Pal Control Room</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero-card panel-card">
+        <div class="hero-copy">
+          <p class="eyebrow">Cute Control Cabinet</p>
+          <h1>Pressure Pal Control Room</h1>
+          <p class="hero-text">
+            Live pressure reading, gentle valve control, and one-click firmware updates for your Arduino Uno.
+          </p>
+        </div>
+        <div class="kitty-mark" aria-hidden="true">
+          <div class="kitty-bow"></div>
+          <div class="kitty-face">
+            <span class="eye eye-left"></span>
+            <span class="eye eye-right"></span>
+            <span class="nose"></span>
+            <span class="whisker whisker-left-top"></span>
+            <span class="whisker whisker-left-bottom"></span>
+            <span class="whisker whisker-right-top"></span>
+            <span class="whisker whisker-right-bottom"></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel-card pressure-card">
+          <p class="section-label">Live Pressure</p>
+          <p id="pressureValue" class="pressure-value">--.-- bar</p>
+          <p class="pressure-range">Sensor range: 0.00 to 10.00 bar</p>
+          <div class="pressure-meta">
+            <div>
+              <span class="meta-label">ADC</span>
+              <strong id="adcValue">--</strong>
+            </div>
+            <div>
+              <span class="meta-label">Volts</span>
+              <strong id="voltsValue">--.-- V</strong>
+            </div>
+          </div>
+          <p id="lastUpdate" class="subtle-copy">Waiting for live data from the Arduino.</p>
+        </section>
+
+        <section class="panel-card connect-card">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Connection</p>
+              <h2>Arduino Link</h2>
+            </div>
+            <span id="statusPill" class="status-pill waiting">Waiting</span>
+          </div>
+          <div class="port-toolbar">
+            <label class="field-label" for="portSelect">Detected COM Ports</label>
+            <button id="refreshPortsButton" class="mini-button" type="button">Refresh Ports</button>
+          </div>
+          <select id="portSelect" class="port-select"></select>
+          <label class="field-label manual-label" for="manualPortInput">Manual COM Port</label>
+          <input id="manualPortInput" class="port-input" type="text" value="COM6" placeholder="Example: COM6" />
+          <p id="portDiagnostics" class="diagnostic-copy">System check found COM6 on this computer.</p>
+          <p id="portNote" class="subtle-copy">Choose the Arduino Uno serial port before connecting, or type it manually.</p>
+          <div class="button-row">
+            <button id="connectButton" class="action-button primary-button" type="button">Connect</button>
+            <button id="updateButton" class="action-button secondary-button" type="button">Update Firmware</button>
+          </div>
+        </section>
+
+        <section class="panel-card valve-card">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Solenoid Valve</p>
+              <h2>Manual Control</h2>
+            </div>
+            <div class="relay-indicator">
+              <span id="relayLamp" class="lamp lamp-off"></span>
+              <span id="relayLabel">Valve OFF</span>
+            </div>
+          </div>
+          <button id="relayButton" class="relay-button relay-off" type="button">Turn Valve ON</button>
+          <p class="subtle-copy">Safety rule: if the app disconnects or the Arduino restarts, the valve returns to OFF.</p>
+        </section>
+
+        <section class="panel-card notes-card">
+          <p class="section-label">System Notes</p>
+          <ul class="notes-list">
+            <li>Wire the 0-5V converter output to Arduino Uno pin A0 with common ground.</li>
+            <li>Drive the relay input from Arduino pin D8 and switch the 24V valve circuit on the relay contacts.</li>
+            <li>The app assumes 0-5V equals 0-10 bar and the valve is normally closed.</li>
+          </ul>
+        </section>
+      </main>
+
+      <aside id="messageBanner" class="message-banner neutral">Select a COM port to begin your live pressure session.</aside>
+    </div>
+
+    <script type="module" src="./renderer/main.js"></script>
+  </body>
+</html>
