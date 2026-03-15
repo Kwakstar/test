@@ -16,6 +16,19 @@ Pressure Pal Control Room is a Windows desktop app built with Electron and TypeS
 2. Build the desktop app with `cmd /c npm run build`.
 3. Start the app with `cmd /c npm start`.
 
+## Windows executable via GitHub
+
+- GitHub Actions workflow: `.github/workflows/build-windows.yml`
+- Trigger it by pushing to `main`, creating a tag like `v0.1.0`, or running it manually from the Actions tab.
+- The workflow installs dependencies, builds the app, runs tests, and packages Windows artifacts with `electron-builder`.
+- Built files are uploaded as GitHub Actions artifacts.
+- If the run was triggered by a tag such as `v0.1.0`, the workflow also attaches the generated Windows files to a GitHub Release.
+
+### Expected outputs
+
+- Portable executable: `pressure-pal-control-room-<version>-portable.exe`
+- NSIS installer: `pressure-pal-control-room-<version>-nsis.exe`
+
 ## Firmware build
 
 1. Install Arduino CLI and the `arduino:avr` core.
